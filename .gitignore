@@ -3,4 +3,5 @@
 *~
 .DS_Store
 .vagrant
-#.cookbooks
+cookbooks/
+/Vagrantfile
