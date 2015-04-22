@@ -1,3 +1,6 @@
+#Project-specific exclude in .git/info/exclude
+
 *~
 .DS_Store
 .vagrant
+/cookbooks/*
