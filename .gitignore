@@ -5,3 +5,6 @@
 .vagrant
 cookbooks/
 /Vagrantfile
+#
+#/app/Express/
+node_modules/
