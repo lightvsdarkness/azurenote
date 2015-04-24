@@ -2,24 +2,27 @@ var ntwitter = require("ntwitter"),
 credentials = require("./credentials.json"),
 twitter,
 counts = {};
-// настроим объект twitter
+var tweet = "Р­С‚Рѕ С‚РІРёС‚";
+// Г­Г Г±ГІГ°Г®ГЁГ¬ Г®ГЎГєГҐГЄГІ twitter
 twitter = ntwitter(credentials);
-// обнуляем счетчики
+// Г®ГЎГ­ГіГ«ГїГҐГ¬ Г±Г·ГҐГІГ·ГЁГЄГЁ
 counts.awesome = 0;
+
 twitter.stream(
 "statuses/filter",
 { "track": ["awesome", "cool", "rad", "gnarly", "groovy"] },
 function(stream) {
-stream.on("data", function(tweet) {
-if (tweet.indexOf("awesome") > -1) {
-// приращение счетчика для слова awesome
-counts.awesome = counts.awesome + 1;
-}
+	stream.on("data", function(tweet) {
+		//console.log(tweet.text);
+		if (tweet.text.indexOf("awesome") > -1) {
+		// ГЇГ°ГЁГ°Г Г№ГҐГ­ГЁГҐ Г±Г·ГҐГІГ·ГЁГЄГ  Г¤Г«Гї Г±Г«Г®ГўГ  awesome
+		counts.awesome = counts.awesome + 1;
+		}
+	});
 });
-}
-);
-// вводим счетчик каждые 3 секунды
+// ГўГўГ®Г¤ГЁГ¬ Г±Г·ГҐГІГ·ГЁГЄ ГЄГ Г¦Г¤Г»ГҐ 3 Г±ГҐГЄГіГ­Г¤Г»
 setInterval(function () {
-console.log("awesome: " + counts.awesome);
+	//console.log("awesome: " + counts.awesome);
 }, 3000);
+
 module.exports = counts;

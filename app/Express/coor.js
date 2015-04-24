@@ -6,6 +6,7 @@ console.log(credentials);
 
 // настроим наш объект twitter
 twitter = ntwitter(credentials);
+
 // настроим поток twitter с тремя параметрами,
 // разделенными запятыми
 twitter.stream(
