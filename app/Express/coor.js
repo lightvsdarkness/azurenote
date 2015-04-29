@@ -2,7 +2,7 @@ var ntwitter = require("ntwitter"),
 credentials = require("./credentials.json"),
 twitter;
 
-console.log(credentials);
+//console.log(credentials);
 
 // настроим наш объект twitter
 twitter = ntwitter(credentials);
@@ -17,7 +17,9 @@ twitter.stream(
 // третий параметр Ч обратный вызов, срабатывающий, когда поток создан
 function(stream) {
 stream.on("data", function(tweet) {
+
 console.log(tweet.text);
+
 });
 }
 );

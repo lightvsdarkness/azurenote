@@ -1,5 +1,7 @@
 ## Azure Testing
+(Azurenote == vsazure) == true
 
+---------------------------------------------------------------
 Vagrant
 You can test out your environment by ssh'ing into your environment and running the sample script:
 
