@@ -1,25 +1,43 @@
 var ntwitter = require("ntwitter"),
-credentials = require("./credentials.json"),
-twitter,
-counts = {};
-// настроим объект twitter
+    redis = require("redis"), // require the redis module
+    credentials = require("./credentials.json"),
+    redisClient,
+    counts = {},
+    twitter;
+
 twitter = ntwitter(credentials);
-// обнуляем счетчики
-counts.awesome = 0;
-twitter.stream(
-"statuses/filter",
-{ "track": ["awesome", "cool", "rad", "gnarly", "groovy"] },
-function(stream) {
-stream.on("data", function(tweet) {
-if (tweet.indexOf("awesome") > -1) {
-// приращение счетчика для слова awesome
-counts.awesome = counts.awesome + 1;
-}
+
+// create a client to connect to Redis
+client = redis.createClient();
+
+// initialize to zero
+
+client.get("awesome", function (err, awesomeCount) {
+    if (err !== null) {
+	//handle error
+    }
+
+    // initialize our counter to the integer version
+    // of the value stored in Redis, or 0 if it's not
+    // set
+    counts.awesome = parseInt(awesomeCount,10) || 0;
+
+
+    twitter.stream(
+	"statuses/filter",
+	{ track: ["awesome", "cool", "rad", "gnarly", "groovy"] },
+	function(stream) {
+            stream.on("data", function(tweet) {
+		if (tweet.text.indexOf("awesome") >= -1) {
+                    // increment the key on the client
+                    client.incr("awesome");
+
+                    counts.awesome = counts.awesome + 1;
+		}
+            });
+	}
+    );
 });
-}
-);
-// вводим счетчик каждые 3 секунды
-setInterval(function () {
-console.log("awesome: " + counts.awesome);
-}, 3000);
+
 module.exports = counts;
+

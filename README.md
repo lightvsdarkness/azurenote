@@ -1,5 +1,5 @@
 ## Azure Testing
-(Azurenote == vsazure) == true
+(Azurenote == vsazurenote) == true
 
 ---------------------------------------------------------------
 Vagrant
