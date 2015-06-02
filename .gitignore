@@ -4,7 +4,6 @@
 .DS_Store
 .vagrant
 cookbooks/
-/Vagrantfile
-#
+
 #/app/Express/
 node_modules/
